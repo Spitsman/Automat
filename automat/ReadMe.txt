@@ -1,1 +1,40 @@
-Программа на вход получает строку состоящую из нулей и единиц и выводит в консоль yes, если в строке чётное число символов 0 и нечётное число 1. В противном случае программа выводит no.
+========================================================================
+    CONSOLE APPLICATION : automat Project Overview
+========================================================================
+
+AppWizard has created this automat application for you.
+
+This file contains a summary of what you will find in each of the files that
+make up your automat application.
+
+
+automat.vcxproj
+    This is the main project file for VC++ projects generated using an Application Wizard.
+    It contains information about the version of Visual C++ that generated the file, and
+    information about the platforms, configurations, and project features selected with the
+    Application Wizard.
+
+automat.vcxproj.filters
+    This is the filters file for VC++ projects generated using an Application Wizard. 
+    It contains information about the association between the files in your project 
+    and the filters. This association is used in the IDE to show grouping of files with
+    similar extensions under a specific node (for e.g. ".cpp" files are associated with the
+    "Source Files" filter).
+
+automat.cpp
+    This is the main application source file.
+
+/////////////////////////////////////////////////////////////////////////////
+Other standard files:
+
+StdAfx.h, StdAfx.cpp
+    These files are used to build a precompiled header (PCH) file
+    named automat.pch and a precompiled types file named StdAfx.obj.
+
+/////////////////////////////////////////////////////////////////////////////
+Other notes:
+
+AppWizard uses "TODO:" comments to indicate parts of the source code you
+should add to or customize.
+
+/////////////////////////////////////////////////////////////////////////////

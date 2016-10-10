@@ -2,6 +2,7 @@
 //
 
 #include "Automat.h"
+#include "Command.h"
 #include "stdafx.h"
 
 #include <fstream>
@@ -9,90 +10,39 @@
 
 using namespace std;
 
-Automat::Automat()
+Automat::Automat(const vector<Command>& program, States startState, const vector<States>& finalStates)
 {
-	result = false;
-	state = &Automat::q0;
+	this->program = program;
+	this->startState = startState;
+	this->finalStates = finalStates;
 }
 
 Automat::~Automat()
 {}
 
-void Automat::q0(char c)
+bool Automat::run(string filename)
 {
-	result = false;
-	switch (c)
-	{
-	case '0':
-		state = &Automat::q1;
-		break;
-	case '1':
-		state = &Automat::qf;
-		break;
-	default:
-		break;
-	}
-}
+	currentState = startState;
 
-void Automat::q1(char c)
-{
-	result = false;
-	switch (c)
-	{
-	case '0':
-		state = &Automat::q0;
-		break;
-	case '1':
-		state = &Automat::q2;
-		break;
-	default:
-		break;
-	}
-}
-
-void Automat::q2(char c)
-{
-	result = false;
-	switch (c)
-	{
-	case '0':
-		state = &Automat::qf;
-		break;
-	case '1':
-		state = &Automat::q1;
-		break;
-	default:
-		break;
-	}
-}
-
-void Automat::qf(char c)
-{
-	result = true;
-	switch (c)
-	{
-	case '0':
-		state = &Automat::q2;
-		break;
-	case '1':
-		state = &Automat::q0;
-		break;
-	default:
-		break;
-	}
-}
-
-
-void Automat::run(string filename)
-{
 	ifstream file(filename);
 	while (!file.eof())
 	{
 		char c = file.get();
-		(this->*state)(c);
+		processCommand(c);
 	}
 	file.close();
-	cout << (result ? "yes" : "no") << endl;
+
+	return std::find(finalStates.begin(), finalStates.end(), currentState) != finalStates.end();
 }
 
-
+void Automat::processCommand(char c)
+{
+	for each (Command cmd in program)
+	{
+		if (cmd.matchState(currentState, c))
+		{
+			currentState = cmd.getNextState();
+			return;
+		}
+	}
+}
